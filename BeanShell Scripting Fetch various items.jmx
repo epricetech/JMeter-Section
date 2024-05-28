@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan">
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="BeanShell Scripting Fetch various items">
+        <intProp name="ThreadGroup.num_threads">1</intProp>
+        <intProp name="ThreadGroup.ramp_time">1</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <stringProp name="LoopController.loops">1</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP Request">
+          <stringProp name="HTTPSampler.domain">www.codeacademy.com</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor">
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="script">// Fetch Content Type
+//  ctx.getPreviousResult().getContentType()
+
+log.info(&quot;Content Type : &quot; + ctx.getPreviousResult().getContentType());
+
+//  Fetch Response Body Size
+//  ctx.getPreviousResult().getBodySizeAsLong()
+
+log.info(&quot;Response Body Size :  &quot; + ctx.getPreviousResult().getBodySizeAsLong());
+
+// Fetch Response Header Size
+//  ctx.getPreviousResult().getHeaderSize()
+
+log.info(&quot;Response Header Size :  &quot; + ctx.getPreviousResult().getHeadersSize());
+
+
+//  Feetch Thread Name
+//  ctx.getPreviousResult().getThreadName()
+log.info(&quot;Tread Name :  &quot; + ctx.getPreviousResult().getThreadName());
+
+// Fetch Time taken by Sampler
+//  ctx.getResponseResult().getTime()
+log.info(&quot;Sampler Time :  &quot; + ctx.getPreviousResult().getTime());
+
+
+// Fetch Url  of Request
+//  ctx.getResponseResult().getUrlAsString()
+log.info(&quot;URL :  &quot; + ctx.getPreviousResult().getUrlAsString());
+
+//  getErrorCount()
+log.info(&quot;Error CountL :  &quot; + ctx.getPreviousResult().getErrorCount());
+
+// getLatency()
+log.info(&quot;Latency :  &quot; + ctx.getPreviousResult().getLatency());
+
+// getStartTime()
+log.info(&quot;Start Time :  &quot; + ctx.getPreviousResult().getStartTime());
+
+// getEndTime()
+log.info(&quot;End Time :  &quot; + ctx.getPreviousResult().getEndTime());
+
+// getTime
+log.info(&quot;Total Time :  &quot; + ctx.getPreviousResult().getTime());</stringProp>
+          </BeanShellPostProcessor>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
